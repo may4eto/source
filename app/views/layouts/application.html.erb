@@ -11,6 +11,21 @@
   </head>
 
   <body>
+    <% if flash[:success].present? %>
+      <div class="success">
+        <%= flash[:success] %>
+      <div>
+    <% end %>
+    <header>
+      <h1>Source</h1>
+      <% if is_logged_in? %>
+        <nav>Welcome, <%= @current_user.name %>!</nav>
+        <%= link_to "Log out", session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Sign up", new_user_path %>
+        <%= link_to "Log in", new_session_path %>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>
