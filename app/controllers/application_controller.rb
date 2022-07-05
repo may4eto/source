@@ -13,4 +13,10 @@ class ApplicationController < ActionController::Base
     def is_logged_in?
         session[:user_id].present?
     end 
+    def force_login
+        unless is_logged_in?
+            flash[:error] = "Please log in to use this feature"
+            redirect_to root_path 
+        end 
+    end
 end
